@@ -1,0 +1,56 @@
+DNS
+
+add 2 server
+name 1: Webserver(10.0.0.2)
+name 2: DNSserver(10.0.0.1)
+
+add a switch connect to both server
+add a pc connect to switch
+
+
+Inside server1:webserver
+go to services 
+http
+index.html(edit)
+
+paste this and save:
+
+<html>
+<h1>Congrats DNS server working</h1>
+</html>
+
+Inside server1:DNS server
+go to services 
+dns
+on Dns
+name:dnstester.com
+address:10.0.0.2
+rest all default save
+
+In pc:
+Set ip of pc static 10.0.0.4
+dns server set as 10.0.0.1(same tab in ip)
+then click on webbrowser in pc
+search 10.0.0.2(webbrowser address)
+output:Congrats DNS server working
+search:dnstester.com
+output:Congrats DNS server working
+
+
+extra if need admin:
+add one more laptop/pc connect to switch
+give ip 10.0.0.5
+go to config in that pc/laptop change display name to admin
+then go to dns server
+dns tab
+name:admin
+ip:10.0.0.5
+save
+
+from 1st pc ping to 2nd pc by typing:
+ping admin
+
+
+Done
+
+
