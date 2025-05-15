@@ -1,0 +1,54 @@
+*Double Router
+
+
+Subnet diagram in this: 1  2
+                        4  3
+*******************************
+router1
+*******************************
+en
+conf t
+interface gig0/0
+ip address 192.168.45.1 255.255.255.128
+ip helper-address 192.168.45.2
+no shutdown
+exit
+interface gig0/1
+ip address 192.168.45.225 255.255.255.248
+ip helper-address 192.168.45.2
+no shutdown
+exit
+interface gig0/2
+ip address 192.168.45.233 255.255.255.252
+ip helper-address 192.168.45.2
+no shutdown
+exit
+ip route 192.168.45.128 255.255.255.192 192.168.45.234
+ip route 192.168.45.192 255.255.255.224 192.168.45.234
+end
+write memory
+
+**************************************
+router2
+*****************************************
+enable
+conf t
+interface g0/0
+ip address 192.168.45.129 255.255.255.192
+ip helper-address 192.168.45.2
+no shutdown
+exit
+interface gig0/1
+ip address 192.168.45.193 255.255.255.224
+ip helper-address 192.168.45.2
+no shutdown
+exit
+interface gig0/2
+ip address 192.168.45.234 255.255.255.252
+no shutdown
+exit
+ip route 192.168.45.0 255.255.255.128 192.168.45.233
+ip route 192.168.45.224 255.255.255.248 192.168.45.233
+end
+write memory
+
